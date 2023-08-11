@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { query,collection, getDocs, where, doc, getDoc, limit, orderBy, setDoc, updateDoc,arrayRemove, arrayUnion, serverTimestamp, deleteDoc} from 'firebase/firestore/lite';
-// import Nav from './Nav'
+import Nav from './Nav'
 import { db} from '../auth/firebaseConfig';
 import { Image, Skeleton, Avatar, message } from 'antd';
 import { setcopyData } from '../store/slice';
@@ -106,9 +106,9 @@ function Profile() {
     // },[saved])
     return (
     <section className={posts.length === 0 ? 'lg:grid lg:grid-cols-5 lg:justify-items-center flex flex-col lg:flex min-h-screen bg-main': 'flex lg:flex-row flex-col min-h-screen bg-main text-dim-white'}>
-    {/* <div className='sm:sticky sm:top-0 sm:z-10'>
+    <div className='sm:sticky sm:top-0 sm:z-10'>
       <Nav/>
-    </div> */}
+    </div>
     {/* <div className={posts.length === 0? 'w-9/12 col-start-2 col-end-5': "flex flex-col"}>
       <Skeleton loading={Loading} paragraph={{rows:0}}>
           <Link as={NavLink} to={`/profile/${user.uid}`} className={posts.length === 0? 'bg-secondary lg:my-10 lg:w-full lg:flex hidden lg:items-end lg:rounded-xl': 'bg-secondary lg:my-10 lg:w-1/2 lg:flex lg:items-end lg:rounded-xl lg:m-auto hidden'}>
