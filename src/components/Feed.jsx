@@ -39,12 +39,12 @@ function Profile() {
   const handleLikes = async(Id) => {
     setRender(true)
     const idDocument = Id
-    const specificRef = doc(db, "users", Id)
+    const specificRef = doc(db, "posts", Id)
     getDoc(specificRef).then((resp)=> {
       setRender(true)
     const data = resp.data()
     const likesArray = data.likes
-    const updateRef = doc(db, "users", idDocument)
+    const updateRef = doc(db, "posts", idDocument)
         if(likesArray.includes(user.uid)){
             updateDoc(updateRef,{
                 likes: arrayRemove(user.uid)
@@ -61,7 +61,7 @@ function Profile() {
 }
 const savePost = async(id) => {
     event.preventDefault();
-    const documentRef = doc(db, 'users', id)
+    const documentRef = doc(db, 'posts', id)
     const getSave = await getDoc(doc(db, 'saved', id))
     
     if(getSave.exists() === true){
@@ -78,26 +78,26 @@ const savePost = async(id) => {
     
     }
   }
-
-  
   // start of getting the saved Posts from firebase
   const getSavedPosts = async() => {
     const queryRef = collection(db, 'saved')
     const savedQuery = query(queryRef, where('savedby', '==', user.uid), orderBy('savedAt') ,limit(2))
     const getPosts = await getDocs(savedQuery)
-    const Data =  getPosts.docs.map(async(items)=> {
-      
+    const Data =  getPosts.docs.map(async(items)=> {      
         if(items.exists()){
             const data = items.data()
+            // console.log(await getDoc(data.ref))
             const getSaved = await getDoc(data.ref)
+            console.log(getSaved.exists())
             const savedData = getSaved.data()
+            // console.log(getSaved)
             setSaved((prev)=> [...prev, savedData])
         }else{
             return []
         }
     })
 }
-    useEffect(()=> {getPosts()}, [])
+    useEffect(()=> {getPosts()}, [render, user])
     useEffect(()=> {getcurrentUser()} , [])
     useEffect(()=> {getSavedPosts()}, [user, render])
     useEffect(()=> {
