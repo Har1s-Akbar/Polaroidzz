@@ -15,6 +15,7 @@ function Profile() {
   const user = useSelector((state)=> state.reducer.userdata);
   const CopyUser = useSelector((state)=> state.reducer.copyUserdata)
   const [Loading, setloading] = useState(true)
+  const [loadingUser, setLoading] = useState(true)
   const [posts, setposts] = useState([])
   const [ render, setRender] = useState(false)
   //  states for getting saved posts
@@ -24,6 +25,7 @@ function Profile() {
     const getData = await getDoc(doc(db, 'usersProfile', user.uid))
     const data = getData.data()
     dispatch(setcopyData(data))
+    setloading(false)
   }
 
 // start of getting all posts from the users collection firebase
@@ -104,7 +106,7 @@ const savePost = async(id) => {
       const unique = [...new Map(saved.map(item => [item['Id'], item])).values()]
       setuniqueSaved(unique)
     },[saved])
-    return ( Loading ? <div className='min-h-screen bg-main'></div> :
+    return ( Loading && loadingUser ? <div className='min-h-screen bg-main'></div> :
     <section className={posts.length === 0 ? 'lg:grid lg:grid-cols-5 lg:justify-items-center flex flex-col lg:flex min-h-screen bg-main': 'flex lg:flex-row flex-col min-h-screen bg-main text-dim-white'}>
     <div className='sm:sticky sm:top-0 sm:z-10'>
       <Nav/>
@@ -126,8 +128,8 @@ const savePost = async(id) => {
                   <Skeleton paragraph={{rows:1}} loading={Loading} avatar>
                     <Link as={NavLink} to={`/profile/${item.post_useruid}`} className='flex items-center lg:w-full w-2/5'>
                       <Image src={item.userPhoto} preview={false} width={60} className='rounded-full w-1/2'/>
-                      <div className='flex items-start flex-col ml-3'>
-                        <h1 className='lg:text-xl text-lg text-dim-white font-medium'>{item.userName}</h1>
+                      <div className='flex w-full items-start flex-col ml-3'>
+                        <h1 className='lg:text-xl text-dim-white font-medium'>{item.userName}</h1>
                         <p className='lg:text-sm text-xs text-sim-white font-bold italic opacity-90'>@{item.username}</p>
                       </div>
                     </Link>
@@ -140,9 +142,9 @@ const savePost = async(id) => {
                     <Image src={item.post_image} className='rounded-md'/>
                 </div>
               </div>
-              <div className='bg-secondary rounded-xl w-full pb-3 lg:py-5 '>
-              <div className='flex items-center w-11/12 m-auto justify-between'>
-                <button onClick={()=> handleLikes(item.Id)} className='flex items-end'>
+              <div className='bg-secondary rounded-xl w-full py-2 lg:py-5 '>
+              <div className='flex items-start w-11/12 m-auto justify-between'>
+                <button onClick={()=> handleLikes(item.Id)} className='flex items-center'>
                   <h1 className='mx-2 text-xl font-thin text-dim-white'>{item.likes.length}</h1>
                   {/* <h1 className='mx-2 text-xl font-thin text-dim-white'>0</h1> */}
                   <Avatar icon={<LikeOutlined />} className='bg-secondary' style={{fontSize: '150%'}} size={'large'}/>

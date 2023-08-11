@@ -5,7 +5,7 @@ import Nav from './Nav';
 import { useSelector } from 'react-redux';
 import { Image, Avatar } from 'antd';
 import { EditOutlined, RightOutlined, BarsOutlined, DeleteOutlined, PlusOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function Comments() {
   const [commentText, setComment] = useState('')
@@ -85,20 +85,22 @@ const getSinglePost = async()=>{
       </div>
       <section className='lg:flex lg:flex-col w-full'>
       <div className='bg-secondary hidden my-10 w-1/2 lg:flex items-end rounded-xl m-auto'>
+          <Link to={`/profile/${user.uid}`}>
           <Image src={user.photo} preview={false} fallback='https://rb.gy/tebns' className='rounded-full w-1/2 opacity-80 border-2 border-dim-white my-5 ml-5' width={55}/>
-          <PlusOutlined className='lg:mb-6'/>
+          {/* <PlusOutlined className='lg:mb-6'/> */}
+          </Link>
       </div>
-        <div className={editModal ? 'opacity-50 w-11/12 m-auto lg:m-0 lg:w-9/12': ' lg:m-0 m-auto w-11/12 lg:w-9/12'}>
+        <div className={editModal ? 'opacity-50 w-11/12 m-auto lg:m-0 lg:w-9/12': ' lg:m-0 m-auto w-11/12'}>
           <section className='bg-secondary w-full grid grid-cols-1 lg:ml-14 rounded-xl lg:flex-row lg:flex my-5 lg:justify-between'>
                     <div className='lg:w-1/2 w-full flex flex-col justify-between'>
                       <div className='flex flex-col'>
                       <div className='w-full flex items-satrt justify-between mt-3 border-b-2 pb-5 border-dimest'>
-                        <div className='flex ml-3 w-6/12 lg:w-full items-start lg:items-center'>
+                        <div className='flex ml-3 w-6/12 lg:w-full items-start'>
                           <Image src={specificPost.userPhoto} className='rounded-full' preview={false} width={60}/>
                           <div className='flex flex-col items-start mx-3'>
                             <h1 className='text-dim-white text-lg font-bold lg:font-semibold'>{specificPost.userName}</h1>
                             <p className='italic text-xs font-bold'>{specificPost.username}</p>
-                            <p className='lg:text-xs text-sm font-thin text-dim-white my-2 font-semibold'>{specificPost.description}</p>
+                            <p className='lg:text-xl text-sm font-thin text-dim-white my-2 font-semibold'>{specificPost.description}</p>
                           </div>
                         </div>
                         <div className=''>

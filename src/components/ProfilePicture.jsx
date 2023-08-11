@@ -55,7 +55,7 @@ const showModal = () => {
                 updateDoc(doc(db, 'usersProfile', profile.uid),{
                     photo: url
                 })
-                const updateRef = collection(db, 'users')
+                const updateRef = collection(db, 'posts')
                 const queryRef = query(updateRef, where('post_useruid', '==', profile.uid))
                 const dataPosts = await getDocs(queryRef)
                 const updatePosts = dataPosts.docs.map((item)=> {

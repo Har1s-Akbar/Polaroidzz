@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import { AuthFail, AuthSuccess, setUser } from '../store/slice';
 import { useNavigate} from 'react-router-dom';
 import { v4 } from 'uuid';
+import { message } from 'antd';
 
 function Login() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function Login() {
   const handleSignUp = (event) => {
     event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password).then(async(userCred)=>{
+      message.info('creating your account', 5)
       const user = userCred.user;
       dispatch(setUser(user));
     }).then(()=>{

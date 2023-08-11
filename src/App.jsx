@@ -8,14 +8,14 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signin" element={<Signin/>}/>
-      <Route element={<PrivateRoutes/>}>
         <Route path="/loading/:id" element={<Loading/>}/>
         <Route path='profileform/:id' element={<Profileform/>}/>
+      {/* <Route element={<PrivateRoutes/>}> */}
         <Route path="/feed" element={<Feed/>}/>
         <Route path="/create/:id" element={<Create/>}/>
         <Route path="/comments/:id" element={<Comments/>}/>
         <Route path="/profile/:id" element={<Profile/>}/>
-      </Route>
+      {/* </Route> */}
     </Routes>
     </BrowserRouter>
   )

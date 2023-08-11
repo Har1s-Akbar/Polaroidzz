@@ -19,13 +19,13 @@ function Signin() {
     const unq = v4()
     const dispatch = useDispatch()
     const signIn = (event) =>{
+        message.loading('Wait, we are logging you in', 3)
         event.preventDefault();
         signInWithEmailAndPassword(auth, email,password,).then((userCred)=>{
             const user = userCred.user;
             console.log(user)
             dispatch(setUser(user));
-            const unq = v4()
-            navigate(`/profileform/${unq}`)
+            navigate(`/loading/${user.uid}`)
         }).catch((error)=> {
             const errorCode = error.code;
             const errorMessage = error.message;
