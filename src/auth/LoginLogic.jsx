@@ -24,7 +24,8 @@ function Login() {
       const user = userCred.user;
       dispatch(setUser(user));
     }).then(()=>{
-      navigate('/feed');
+      const unq = v4()
+      navigate(`/loading/${user.uid}`)
     }).catch((error)=> {
       const errorCode = error.code;
       const errorMessage = error.message;
