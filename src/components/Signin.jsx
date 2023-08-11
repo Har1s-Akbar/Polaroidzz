@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {sendPasswordResetEmail, signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from '../auth/firebaseConfig';
 import {useDispatch } from 'react-redux';
-import { setUser } from '../store/slice';
+import { AuthFail, AuthSuccess, setUser } from '../store/slice';
 import { Modal, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -25,8 +25,10 @@ function Signin() {
             const user = userCred.user;
             console.log(user)
             dispatch(setUser(user));
+            dispatch(AuthSuccess())
             navigate(`/loading/${user.uid}`)
         }).catch((error)=> {
+            dispatch(AuthFail())
             const errorCode = error.code;
             const errorMessage = error.message;
           });
@@ -35,6 +37,7 @@ function Signin() {
         sendPasswordResetEmail(auth, resetEmail).then(()=>{
             message.success('reset link sent successfully', 3)
             setModal2Open(false)
+            dispatch(AuthFail())
         }).catch((e)=>{
             message.error(e)
         })

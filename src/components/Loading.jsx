@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { doc, runTransaction } from 'firebase/firestore/lite'
 import { db } from '../auth/firebaseConfig'
 import { v4 } from 'uuid'
-
 function Loading() {
     const {id} = useParams()
     const navigate = useNavigate()

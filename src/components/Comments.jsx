@@ -108,7 +108,7 @@ const getSinglePost = async()=>{
                             <button className='relative' onClick={settingShow}>
                             <Avatar icon={<BarsOutlined/>} className='bg-secondary'/>
                           </button>
-                          <div className={showSetting ? 'absolute z-10 border border-white rounded-lg right-7 lg:left-[600px] lg:w-1/12 bg-main' : 'hidden'} >
+                          <div className={showSetting ? 'absolute z-10 border border-white rounded-lg right-7 lg:left-0 lg:w-1/12 bg-main' : 'hidden'} >
                             <div className='bg-main flex flex-col w-1/6 justify-center p-3 rounded-lg lg:ml-6 ml-0'>
                               <button className='flex items-end my-2' onClick={()=> handleDelete(specificPost.Id)}>
                                 <Avatar className='' size={'small'} icon={<DeleteOutlined/>}/>
