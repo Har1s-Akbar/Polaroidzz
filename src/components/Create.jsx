@@ -1,5 +1,5 @@
 import { useState} from 'react';
-// import Nav from './Nav';
+import Nav from './Nav';
 import { Upload, Modal, Image, message } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { db,storage } from '../auth/firebaseConfig';
@@ -55,13 +55,13 @@ function Create() {
             Id : uniqueId,
             description: Description,
             post_image: url,
-            // userName: user.name,
-            // userEmail: user.email,
-            // username: user.username,
-            // userPhoto:user.photo,
-            // post_useruid: user.uid,
-            // isVerified: user.Isverified,
-            // likes: [],
+            userName: user.name,
+            userEmail: user.email,
+            username: user.username,
+            userPhoto:user.photo,
+            post_useruid: user.uid,
+            isVerified: user.Isverified,
+            likes: [],
             time: serverTimestamp(),
             editedAt: null
           }).then(()=> {
@@ -75,9 +75,9 @@ function Create() {
   }
   return (
     <section className='bg-main h-screen lg:h-full'>
-      {/* <section className='lg:hidden block'>
+      <section className='lg:hidden block'>
         <Nav/>
-      </section> */}
+      </section>
       <section className='m-auto lg:hidden block my-6 w-9/12 py-2 rounded-xl'>
         <h1 className='text-3xl text-center text-dim-white '>Create Post</h1>
       </section>
@@ -86,13 +86,13 @@ function Create() {
         <div className=' w-11/12 m-auto'>
           <div className='w-full'>
             <div className='flex items-center'>
-            {/* <div className='lg:w-2/5 w-1/6'>
+            <div className='lg:w-2/5 w-1/6'>
             <Image src={user.photo} preview={false} className=' rounded-full' />
-            </div> */}
-            {/* <div className='w-full ml-4'>
+            </div>
+            <div className='w-full ml-4'>
               <h1 className='text-xl font-semibold'>{user.name}</h1>
               <p className='text-xs font-normal italic'>@{user.username}</p>
-            </div> */}
+            </div>
             </div>
           </div>
           <div className=''>

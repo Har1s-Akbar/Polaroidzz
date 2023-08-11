@@ -37,9 +37,8 @@ function Login() {
       dispatch(setUser(user));
       dispatch(AuthSuccess());
       console.log(user)
-      navigate('/feed')
-      // const unq = v4()
-      // navigate(`/${unq}/${user.uid}`)
+      const unq = v4()
+      navigate(`/loading/${user.uid}`)
     }).catch((error) => {
       console.log(error);
       dispatch(setUser([]))
