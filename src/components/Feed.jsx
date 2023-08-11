@@ -27,14 +27,14 @@ function Profile() {
 //   }
 
 // start of getting all posts from the users collection firebase
-//   const getPosts = async() => {
-//     const queryRef = collection(db, 'users');
-//       const querySnapshot = await getDocs(queryRef);
-//       const data = querySnapshot.docs.map((item)=> {return item.data()})
-//       setposts(data)
-//       dispatch(setPosts(data))
-//       setloading(false)
-//     }
+  const getPosts = async() => {
+    const queryRef = collection(db, 'posts');
+      const querySnapshot = await getDocs(queryRef);
+      const data = querySnapshot.docs.map((item)=> {return item.data()})
+      setposts(data)
+      dispatch(setPosts(data))
+      setloading(false)
+    }
   // end of getting posts
 //   const handleLikes = async(Id) => {
 //     setRender(true)
@@ -97,7 +97,7 @@ function Profile() {
 //         }
 //     })
 // }
-    // useEffect(()=> {getPosts()}, [user, render])
+    useEffect(()=> {getPosts()}, [])
     // useEffect(()=> {getcurrentUser()} , [])
     // useEffect(()=> {getSavedPosts()}, [user, render])
     // useEffect(()=> {
@@ -115,7 +115,7 @@ function Profile() {
             <Image src={CopyUser.photo} preview={false} fallback='https://rb.gy/tebns' className='rounded-full w-1/2 opacity-80 border-2 border-dim-white my-5 ml-5' width={55}/>
             <PlusOutlined className='mb-4'/>
           </Link>
-      </Skeleton>
+      </Skeleton> */}
       <div className='flex flex-col lg:flex-row justify-between lg:w-11/12'>
         <div className={posts.length === 0 ? '': 'px-2 lg:ml-10 lg:w-7/12'}>
           {
@@ -123,7 +123,7 @@ function Profile() {
               return <section key={item.Id} className='lg:my-10 my-7'>
                 <div className='w-full my-3 lg:my-5 bg-secondary pt-5 pb-5 px-5 rounded-xl'>
                 <div className='flex items-center w-full'>
-                  <Skeleton paragraph={{rows:1}} loading={Loading} avatar>
+                  {/* <Skeleton paragraph={{rows:1}} loading={Loading} avatar>
                     <Link as={NavLink} to={`/profile/${item.post_useruid}`} className='flex items-center lg:w-full w-2/5'>
                       <Image src={item.userPhoto} preview={false} width={60} className='rounded-full w-1/2'/>
                       <div className='flex items-start flex-col ml-3'>
@@ -131,7 +131,7 @@ function Profile() {
                         <p className='lg:text-sm text-xs text-sim-white font-bold italic opacity-90'>@{item.username}</p>
                       </div>
                     </Link>
-                  </Skeleton>
+                  </Skeleton> */}
                 </div>
                 <Skeleton paragraph={{rows:0}} className='lg:my-4' loading={Loading}>
                   <h1 className='lg:text-xl text-base lg:my-3 my-1 ml-2 text-dim-white font-semibold'>{item.description}</h1>
@@ -143,7 +143,8 @@ function Profile() {
               <div className='bg-secondary rounded-xl w-full pb-3 lg:py-5 '>
               <div className='flex items-center w-11/12 m-auto justify-between'>
                 <button onClick={()=> handleLikes(item.Id)} className='flex items-end'>
-                  <h1 className='mx-2 text-xl font-thin text-dim-white'>{item.likes.length}</h1>
+                  {/* <h1 className='mx-2 text-xl font-thin text-dim-white'>{item.likes.length}</h1> */}
+                  <h1 className='mx-2 text-xl font-thin text-dim-white'>0</h1>
                   <Avatar icon={<LikeOutlined />} className='bg-secondary' style={{fontSize: '150%'}} size={'large'}/>
                 </button>
                 <button>
@@ -162,7 +163,7 @@ function Profile() {
             </section>
             })
           }
-          </div> */}
+          </div>
           <section className={posts.length === 0 ? 'lg:flex lg:flex-col lg:w-1/2 sm:hidden': 'hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-1/4 lg:w-4/12'}>
           <div className={posts.length === 0 ? 'w-full ml-96 my-10':'my-10 m-auto w-11/12'}>
               <Create/>
@@ -191,8 +192,8 @@ function Profile() {
                   </div>
               </div> */}
           </section>
-      {/* </div>
-      </div> */}
+      {/* </div> */}
+      </div> 
   </section>
 
   )
