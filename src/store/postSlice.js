@@ -8,9 +8,12 @@ const postSlice = createSlice({
   reducers:{
     setPosts(state, action){
       state.userPosts = action.payload
+    },
+    postClear(state){
+      state.userPosts = []
     }
   },
 })
 
-export const {setPosts} = postSlice.actions;
+export const {setPosts, postClear} = postSlice.actions;
 export default postSlice;

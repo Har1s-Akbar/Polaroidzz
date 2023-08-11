@@ -66,7 +66,7 @@ function Create() {
             editedAt: null
           }).then(()=> {
             message.success('post Added', 2)
-            // navigate(`/comments/${uniqueId}`)
+            navigate(`/comments/${uniqueId}`)
           }).catch((error)=> {
           })
         });

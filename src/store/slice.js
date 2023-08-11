@@ -20,8 +20,13 @@ const userSlice = createSlice({
     AuthFail(state){
       state.isAuthenticated = false
     },
+    clearfunc(state){
+      state.copyUserdata = [];
+      state.isAuthenticated = false;
+      state.userdata = [];
+    }
   }
 });
 
-export const {setUser, AuthSuccess,AuthFail, setcopyData} = userSlice.actions;
+export const {setUser, AuthSuccess,AuthFail, setcopyData, clearfunc} = userSlice.actions;
 export default userSlice

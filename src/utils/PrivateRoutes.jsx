@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
 function PrivateRoutes() {
-  const token = useSelector((state)=>  state.reducer.userdata)
-  const verified = token.isAnonymous
+  const token = useSelector((state)=>  state.reducer.isAuthenticated)
     return (
-        verified ? <Navigate to='/'/> : <Outlet/>
+        token ?  <Outlet/> : <Navigate to='/'/>
   )
 }
 
