@@ -24,8 +24,7 @@ function Login() {
       const user = userCred.user;
       dispatch(setUser(user));
     }).then(()=>{
-      const unq = v4()
-      navigate(`/loading/${user.uid}`)
+      navigate('/signin')
     }).catch((error)=> {
       const errorCode = error.code;
       const errorMessage = error.message;
