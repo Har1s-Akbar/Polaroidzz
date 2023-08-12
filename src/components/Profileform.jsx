@@ -189,11 +189,8 @@ function Profileform (){
       ]}
     >
       <Select placeholder="Please select your Gender">
-        <Option value="gay">Gay</Option>
-        <Option value="lesbian">Lesbian</Option>
-        <Option value="queer">Queer</Option>
-        <Option value="disable">Disable</Option>
-        <Option value="others">Others</Option>
+        <Option value="male">Male</Option>
+        <Option value="male">Female</Option>
       </Select>
     </Form.Item>
 
@@ -243,8 +240,7 @@ function Profileform (){
       <Form.Item noStyle>
       <ImgCrop rotationSlider >
         <Upload 
-          multiple={false}
-          style={{aspectRatio: 2/1}}
+        style={{aspectRatio: 2/1}}
           listType="picture-circle"
           fileList={filelist}
           onChange={handleChange}
@@ -301,11 +297,8 @@ function Profileform (){
       ]}
     >
       <Select placeholder="Please select your Gender">
-        <Option value="gay">Gay</Option>
-        <Option value="lesbian">Lesbian</Option>
-        <Option value="queer">Queer</Option>
-        <Option value="disable">Disable</Option>
-        <Option value="others">Others</Option>
+        <Option value="male">Male</Option>
+        <Option value="female">Female</Option>
       </Select>
     </Form.Item>
 

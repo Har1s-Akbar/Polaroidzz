@@ -7,6 +7,7 @@ import { Image, Skeleton, Avatar, message } from 'antd';
 import { setcopyData } from '../store/slice';
 import { setPosts } from '../store/postSlice';
 import { Link, NavLink } from 'react-router-dom';
+import { v4 } from 'uuid';
 import { PlusOutlined, LikeOutlined, MessageOutlined , SendOutlined, BookOutlined} from '@ant-design/icons';
 import Create from './Create';
 
@@ -64,18 +65,22 @@ function Profile() {
 const savePost = async(id) => {
     event.preventDefault();
     const documentRef = doc(db, 'posts', id)
-    const getSave = await getDoc(doc(db, 'saved', id))
-    
-    if(getSave.exists() === true){
-      const remove = deleteDoc(doc(db, 'saved' , id)).then(()=> {message.info('Post Unsaved Successfully')})
-      
+    const queryRef = collection(db, 'saved')
+    const savedQuery = query(queryRef, where('savedby', '==', user.uid), where('postId' ,'==', id))
+    const getSave = await getDocs(savedQuery)
+    if(getSave.docs.map((item)=> {return item.exists()})[0] === true){
+      const remove = deleteDoc(getSave.docs.map((item)=> {return item.ref})[0]).then(()=> {message.info('Post Unsaved Successfully')})
+      setRender(false)
     }else{
-      const postSave = setDoc(doc(db, 'saved', id),{
+      const unq = v4()
+      const postSave = setDoc(doc(db, 'saved', unq),{
         savedby: user.uid,
         postId : id,
         savedAt: serverTimestamp(),
         ref: documentRef,
-      }).then(()=> {message.success('Post Saved successfully')
+      }).then(()=> {
+        message.success('Post Saved successfully')
+        setRender(false)
     })
     
     }
@@ -88,11 +93,8 @@ const savePost = async(id) => {
     const Data =  getPosts.docs.map(async(items)=> {      
         if(items.exists()){
             const data = items.data()
-            // console.log(await getDoc(data.ref))
             const getSaved = await getDoc(data.ref)
-            console.log(getSaved.exists())
             const savedData = getSaved.data()
-            // console.log(getSaved)
             setSaved((prev)=> [...prev, savedData])
         }else{
             return []
