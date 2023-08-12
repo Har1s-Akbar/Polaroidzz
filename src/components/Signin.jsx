@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {sendPasswordResetEmail, signInWithEmailAndPassword} from 'firebase/auth';
+import {fetchSignInMethodsForEmail, sendPasswordResetEmail, signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from '../auth/firebaseConfig';
 import {useDispatch } from 'react-redux';
 import { AuthFail, AuthSuccess, setUser } from '../store/slice';
@@ -23,7 +23,6 @@ function Signin() {
         event.preventDefault();
         signInWithEmailAndPassword(auth, email,password,).then((userCred)=>{
             const user = userCred.user;
-            console.log(user)
             dispatch(setUser(user));
             dispatch(AuthSuccess())
             navigate(`/loading/${user.uid}`)

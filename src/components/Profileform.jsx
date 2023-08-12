@@ -190,7 +190,7 @@ function Profileform (){
     >
       <Select placeholder="Please select your Gender">
         <Option value="male">Male</Option>
-        <Option value="male">Female</Option>
+        <Option value="female">Female</Option>
       </Select>
     </Form.Item>
 

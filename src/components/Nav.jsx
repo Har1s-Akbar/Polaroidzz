@@ -45,7 +45,7 @@ const App = () => {
     getItem(<a onClick={()=> {message.info('working on this feature, will be available soon')}}>Notifications</a>, 'sub2', <BellFilled style={{fontSize:'120%'}} />),
     getItem('settings', 'sub1', <SettingFilled style={{fontSize:'120%'}} />, [
       getItem('Sign Out', '5'),
-      getItem(<a href="/signup">Sign Up</a>, '6'),
+      getItem(<a href="/login">Sign Up</a>, '6'),
     ]),
   ];
     const dispatch = useDispatch()
@@ -75,6 +75,9 @@ const App = () => {
     }
   const handleClick = (e) => {
     if(e.key === '5'){
+      signOutFunct()
+    }
+    if(e.key === '6'){
       signOutFunct()
     }
   };

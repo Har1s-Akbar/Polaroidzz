@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {auth, provider} from './firebaseConfig';
-import {signInWithPopup, createUserWithEmailAndPassword} from 'firebase/auth';
+import {signInWithPopup, createUserWithEmailAndPassword, fetchSignInMethodsForEmail} from 'firebase/auth';
 import {useDispatch} from 'react-redux';
 import { AuthFail, AuthSuccess, setUser } from '../store/slice';
 import { useNavigate} from 'react-router-dom';
@@ -21,17 +21,24 @@ function Login() {
   };
   const handleSignUp = (event) => {
     event.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password).then(async(userCred)=>{
-      message.info('creating your account', 5)
-      const user = userCred.user;
-      dispatch(setUser(user));
-    }).then(()=>{
-      navigate('/signin')
-    }).catch((error)=> {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      dispatch(setUser([]));
-    })
+    fetchSignInMethodsForEmail(auth,email).then((result)=>{
+      if(result[0] === "password"){
+        message.error('account is already created', 10)
+        navigate('/signin')
+      }else{
+        createUserWithEmailAndPassword(auth, email, password).then(async(userCred)=>{
+          message.info('creating your account', 5)
+          const user = userCred.user;
+          dispatch(setUser(user));
+        }).then(()=>{
+          navigate('/signin')
+        }).catch((error)=> {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          dispatch(setUser([]));
+        })
+      }
+  })
   }
   const handelGoogle = () =>{
     signInWithPopup(auth,provider).then((result)=>{
