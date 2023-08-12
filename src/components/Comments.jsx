@@ -83,14 +83,14 @@ const getSinglePost = async()=>{
       <div>
         <Nav/>
       </div>
-      <section className='lg:flex lg:flex-col w-full'>
+      <section className='lg:flex lg:flex-col w-full lg:w-10/12 lg:items-center'>
       <div className='bg-secondary hidden my-10 w-1/2 lg:flex items-end rounded-xl m-auto'>
           <Link to={`/profile/${user.uid}`}>
           <Image src={user.photo} preview={false} fallback='https://rb.gy/tebns' className='rounded-full w-1/2 opacity-80 border-2 border-dim-white my-5 ml-5' width={55}/>
           {/* <PlusOutlined className='lg:mb-6'/> */}
           </Link>
       </div>
-        <div className={editModal ? 'opacity-50 lg:pl-20 lg:m-0 m-auto w-11/12 lg:w-9/12': 'lg:pl-20 lg:m-0 m-auto w-11/12 lg:w-9/12'}>
+        <div className={editModal ? 'opacity-50 lg:m-0 m-auto w-11/12 lg:w-9/12': ' lg:m-0 m-auto w-11/12 lg:w-9/12'}>
           <section className='bg-secondary w-full grid grid-cols-1 lg:flex rounded-xl my-5 '>
                     <div className='lg:w-1/2 w-full flex flex-col justify-between'>
                       <div className='flex flex-col'>
@@ -138,7 +138,7 @@ const getSinglePost = async()=>{
                   </section>
               </div>
                 
-                <div className={showSetting ? 'absolute z-5 border border-white ml-52 top-64 rounded-lg h-28 bg-main lg:ml-72 lg:inset-64 lg:w-1/12' : 'hidden'} >
+                <div className={showSetting ? 'absolute z-5 border border-white ml-52 top-64 rounded-lg h-28 bg-main lg:ml-96 lg:inset-64 lg:w-1/12' : 'hidden'} >
                             <div className='bg-main flex flex-col w-1/6 justify-center p-3 rounded-lg lg:ml-6 ml-0'>
                               <button className='flex items-end my-2' onClick={()=> handleDelete(specificPost.Id)}>
                                 <Avatar className='' size={'small'} icon={<DeleteOutlined/>}/>
