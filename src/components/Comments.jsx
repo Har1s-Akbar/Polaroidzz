@@ -91,7 +91,7 @@ const getSinglePost = async()=>{
           </Link>
       </div>
         <div className={editModal ? 'opacity-50 lg:m-0 m-auto w-11/12 lg:w-9/12': ' lg:m-0 m-auto w-11/12 lg:w-9/12'}>
-          <section className='bg-secondary w-full grid grid-cols-1 lg:flex rounded-xl my-5 '>
+          <section className='bg-secondary w-full sm:grid sm:grid-cols-1 lg:flex rounded-xl my-5 '>
                     <div className='lg:w-1/2 w-full flex flex-col justify-between'>
                       <div className='flex flex-col'>
                       <div className='w-full flex items-satrt justify-between mt-3 border-b-2 pb-5 border-dimest'>
